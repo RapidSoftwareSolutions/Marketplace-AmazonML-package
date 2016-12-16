@@ -22,7 +22,7 @@ Adds one or more tags to an object, up to a limit of 10. Each tag consists of a 
 | resourceType| String     | The type of the ML object to tag. Valid Values: BatchPrediction; DataSource; Evaluation; MLModel
 | tags        | JSON       | Array of objects. The key-value pairs to use to create tags. If you specify a key without specifying a value, Amazon ML creates a tag with the specified key and a value of null. See README for more details.
 
-#### tags FORMAT
+#### tags format
 ```json
 [
     {
