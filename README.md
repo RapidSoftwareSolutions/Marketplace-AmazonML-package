@@ -47,7 +47,7 @@ Generates predictions for a group of observations.
 | predictionName| String     | A user-supplied name or description of the BatchPrediction. BatchPredictionName can only use the UTF-8 character set.
 
 ## AmazonML.createDataSourceFromRDS
-Creates a DataSource object from an Amazon Relational Database Service (Amazon RDS).
+(BETA) Creates a DataSource object from an Amazon Relational Database Service (Amazon RDS).
 
 | Field            | Type       | Description
 |------------------|------------|----------
@@ -101,7 +101,7 @@ Creates a DataSource object from an Amazon Relational Database Service (Amazon R
 
 
 ## AmazonML.createDataSourceFromS3
-(BETA) Creates a DataSource from a database hosted on an Amazon Redshift cluster.
+Creates a DataSource from a database hosted on an Amazon Redshift cluster.
 
 | Field             | Type       | Description
 |-------------------|------------|----------
