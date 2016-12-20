@@ -140,7 +140,7 @@
     },
     {
       "name": "createDataSourceFromRDS",
-      "description": "Creates a DataSource object from an Amazon Relational Database Service (Amazon RDS).",
+      "description": "(BETA) Creates a DataSource object from an Amazon Relational Database Service (Amazon RDS).",
       "args": [
         {
           "name": "apiKey",
@@ -276,7 +276,7 @@
     },
     {
       "name": "createDataSourceFromRedshift",
-      "description": "Creates a DataSource from a database hosted on an Amazon Redshift cluster.",
+      "description": "(BETA) Creates a DataSource from a database hosted on an Amazon Redshift cluster.",
       "args": [
         {
           "name": "apiKey",
