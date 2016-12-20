@@ -78,7 +78,7 @@ Creates a DataSource object from an Amazon Relational Database Service (Amazon R
 ```
 
 ## AmazonML.createDataSourceFromRedshift
-Creates a DataSource from a database hosted on an Amazon Redshift cluster.
+(BETA) Creates a DataSource from a database hosted on an Amazon Redshift cluster.
 
 | Field            | Type       | Description
 |------------------|------------|----------
@@ -101,7 +101,7 @@ Creates a DataSource from a database hosted on an Amazon Redshift cluster.
 
 
 ## AmazonML.createDataSourceFromS3
-Creates a DataSource from a database hosted on an Amazon Redshift cluster.
+(BETA) Creates a DataSource from a database hosted on an Amazon Redshift cluster.
 
 | Field             | Type       | Description
 |-------------------|------------|----------
