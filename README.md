@@ -1,3 +1,5 @@
+[![](https://scdn.rapidapi.com/RapidAPI_banner.png)](https://rapidapi.com/package/AmazonML/functions?utm_source=RapidAPIGitHub_AmazonMLFunctions&utm_medium=button&utm_content=RapidAPI_GitHub)
+
 # AmazonML Package
 Amazon Machine Learning is a managed service for building ML models and generating predictions, enabling the development of robust, scalable smart applications.
 * Domain: amazon.com
