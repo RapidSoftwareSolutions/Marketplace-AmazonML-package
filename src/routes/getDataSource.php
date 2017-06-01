@@ -19,8 +19,8 @@ $app->post('/api/AmazonML/getDataSource', function ($request, $response, $args) 
     ]);
     
     $body['DataSourceId'] = $post_data['args']['dataSourceId'];
-    if(!empty($post_data['args']['verbose'])) {
-        $body['Verbose'] = $post_data['args']['verbose'];
+    if(isset($post_data['args']['verbose'])) {
+        $body['Verbose'] = filter_var($post_data['args']['verbose'], FILTER_VALIDATE_BOOLEAN);
     }
     
     try {
@@ -31,7 +31,7 @@ $app->post('/api/AmazonML/getDataSource', function ($request, $response, $args) 
         if(empty($result['contextWrites']['to'])) {
             $result['contextWrites']['to']['status_msg'] = "Api return no results";
         }
-    } catch (S3Exception $e) {
+    } catch (\Aws\S3\Exception\S3Exception $e) {
         // Catch an S3 specific exception.
         $result['callback'] = 'error';
         $result['contextWrites']['to']['status_code'] = 'API_ERROR';

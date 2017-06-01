@@ -21,8 +21,8 @@ Adds one or more tags to an object, up to a limit of 10. Each tag consists of a 
 | apiSecret   | credentials| API secret obtained from Amazon.
 | region      | String     | Region.
 | resourceId  | String     | The ID of the ML object to tag. For example, exampleModelId.
-| resourceType| String     | The type of the ML object to tag. Valid Values: BatchPrediction; DataSource; Evaluation; MLModel
-| tags        | JSON       | Array of objects. The key-value pairs to use to create tags. If you specify a key without specifying a value, Amazon ML creates a tag with the specified key and a value of null. See README for more details.
+| resourceType| Select     | The type of the ML object to tag. Valid Values: BatchPrediction; DataSource; Evaluation; MLModel
+| tags        | Array     | Array of objects. The key-value pairs to use to create tags. If you specify a key without specifying a value, Amazon ML creates a tag with the specified key and a value of null. See README for more details.
 
 #### tags format
 ```json
@@ -65,13 +65,13 @@ Generates predictions for a group of observations.
 | instanceId       | String     | A unique identifier for the Amazon RDS database instance.
 | resourceRole     | String     | A role (DataPipelineDefaultResourceRole) assumed by an EC2 instance to carry out the copy task from Amazon RDS to Amazon Simple Storage Service (Amazon S3).
 | S3StagingLocation| String     | The Amazon S3 location for staging Amazon RDS data. The data retrieved from Amazon RDS using SelectSqlQuery is stored in this location.
-| securityGroupIds | JSON       | Array of strings.  The security information to use to access an RDS DB instance. You need to set up appropriate ingress rules for the security entity IDs provided to allow access to the Amazon RDS instance.
+| securityGroupIds | List       | Array of strings.  The security information to use to access an RDS DB instance. You need to set up appropriate ingress rules for the security entity IDs provided to allow access to the Amazon RDS instance.
 | sqlQuery         | String     | A query that is used to retrieve the observation data for the Datasource.
 | serviceRole      | String     | A role (DataPipelineDefaultRole) assumed by the AWS Data Pipeline service to monitor the progress of the copy task from Amazon RDS to Amazon S3.
 | subnetId         | String     | The subnet ID to be used to access a VPC-based RDS DB instance. This attribute is used by Data Pipeline to carry out the copy task from Amazon RDS to Amazon S3.
 | dataSourceName   | String     | A user-supplied name or description of the DataSource.
-| dataRearrangement| String     | A JSON string that represents the splitting and rearrangement requirements for the Datasource. Sample - "{"splitting":{"percentBegin":10,"percentEnd":60}}"
-| dataSchema       | String     | A JSON string representing the schema. This is not required if DataSchemaUri is specified.
+| dataRearrangement| JSON       | A JSON string that represents the splitting and rearrangement requirements for the Datasource. Sample - "{"splitting":{"percentBegin":10,"percentEnd":60}}"
+| dataSchema       | JSON       | A JSON string representing the schema. This is not required if DataSchemaUri is specified.
 | dataSchemaUri    | String     | The Amazon S3 location of the DataSchema.
 
 #### securityGroupIds format
@@ -97,8 +97,8 @@ Generates predictions for a group of observations.
 | S3StagingLocation| String     | The Amazon S3 location for staging Amazon RDS data. The data retrieved from Amazon RDS using SelectSqlQuery is stored in this location.
 | sqlQuery         | String     | A query that is used to retrieve the observation data for the Datasource.
 | dataSourceName   | String     | A user-supplied name or description of the DataSource.
-| dataRearrangement| String     | A JSON string that represents the splitting and rearrangement requirements for the Datasource. Sample - "{"splitting":{"percentBegin":10,"percentEnd":60}}"
-| dataSchema       | String     | A JSON string representing the schema. This is not required if DataSchemaUri is specified.
+| dataRearrangement| JSON       | A JSON string that represents the splitting and rearrangement requirements for the Datasource. Sample - "{"splitting":{"percentBegin":10,"percentEnd":60}}"
+| dataSchema       | JSON       | A JSON string representing the schema. This is not required if DataSchemaUri is specified.
 | dataSchemaUri    | String     | The Amazon S3 location of the DataSchema.
 
 
@@ -114,8 +114,8 @@ Creates a DataSource from a database hosted on an Amazon Redshift cluster.
 | dataLocation      | String     | The Amazon S3 location of the observation data.
 | computeStatistics | String     | The compute statistics for a DataSource. The statistics are generated from the observation data referenced by a DataSource. Treu or false.
 | dataSourceName    | String     | A user-supplied name or description of the DataSource.
-| dataRearrangement | String     | A JSON string that represents the splitting and rearrangement requirements for the Datasource. Sample - "{"splitting":{"percentBegin":10,"percentEnd":60}}"
-| dataSchema        | String     | A JSON string representing the schema. This is not required if DataSchemaUri is specified.
+| dataRearrangement | JSON       | A JSON string that represents the splitting and rearrangement requirements for the Datasource. Sample - "{"splitting":{"percentBegin":10,"percentEnd":60}}"
+| dataSchema        | JSON       | A JSON string representing the schema. This is not required if DataSchemaUri is specified.
 | dataSchemaLocation| String     | The Amazon S3 location of the DataSchema.
 
 ## AmazonML.createEvaluation
@@ -140,7 +140,7 @@ Creates a new Evaluation of an MLModel. An MLModel is evaluated on a set of obse
 | apiSecret           | credentials| API secret obtained from Amazon.
 | region              | String     | Region.
 | modelId             | String     | A user-supplied ID that uniquely identifies the MLModel.
-| modelType           | String     | The category of supervised learning that this MLModel will address. Choose from the following types: Choose REGRESSION if the MLModel will be used to predict a numeric value. Choose BINARY if the MLModel result has two possible values. Choose MULTICLASS if the MLModel result has a limited number of values.
+| modelType           | Select     | The category of supervised learning that this MLModel will address. Choose from the following types: Choose REGRESSION if the MLModel will be used to predict a numeric value. Choose BINARY if the MLModel result has two possible values. Choose MULTICLASS if the MLModel result has a limited number of values.
 | trainingDataSourceId| String     | The ID of DataSource that points to the training data.
 | modelName           | String     | A user-supplied name or description of the MLModel.
 | parameters          | JSON       | A list of the training parameters in the MLModel. The list is implemented as a map of key-value pairs. See README for more details.
@@ -189,7 +189,7 @@ Returns a list of BatchPrediction operations that match the search criteria in t
 | notEqual      | String     | The not equal to operator.
 | nextToken     | String     | An ID of the page in the paginated results.
 | prefix        | String     | A string that is found at the beginning of a variable, such as Name or Id.
-| sortOrder     | String     | A two-value parameter that determines the sequence of the resulting list of MLModels. Valid Values: asc; dsc
+| sortOrder     | Select     | A two-value parameter that determines the sequence of the resulting list of MLModels. Valid Values: asc; dsc
 
 ## AmazonML.describeDataSources
 Returns a list of DataSource that match the search criteria in the request.
@@ -209,7 +209,7 @@ Returns a list of DataSource that match the search criteria in the request.
 | notEqual      | String     | The not equal to operator.
 | nextToken     | String     | An ID of the page in the paginated results.
 | prefix        | String     | A string that is found at the beginning of a variable, such as Name or Id.
-| sortOrder     | String     | A two-value parameter that determines the sequence of the resulting list of MLModels. Valid Values: asc; dsc
+| sortOrder     | Select     | A two-value parameter that determines the sequence of the resulting list of MLModels. Valid Values: asc; dsc
 
 ## AmazonML.describeEvaluations
 Returns a list of DescribeEvaluations that match the search criteria in the request.
@@ -229,7 +229,7 @@ Returns a list of DescribeEvaluations that match the search criteria in the requ
 | notEqual      | String     | The not equal to operator.
 | nextToken     | String     | An ID of the page in the paginated results.
 | prefix        | String     | A string that is found at the beginning of a variable, such as Name or Id.
-| sortOrder     | String     | A two-value parameter that determines the sequence of the resulting list of MLModels. Valid Values: asc; dsc
+| sortOrder     | Select     | A two-value parameter that determines the sequence of the resulting list of MLModels. Valid Values: asc; dsc
 
 ## AmazonML.describeModels
 Returns a list of MLModel that match the search criteria in the request.
@@ -249,7 +249,7 @@ Returns a list of MLModel that match the search criteria in the request.
 | notEqual      | String     | The not equal to operator.
 | nextToken     | String     | An ID of the page in the paginated results.
 | prefix        | String     | A string that is found at the beginning of a variable, such as Name or Id.
-| sortOrder     | String     | A two-value parameter that determines the sequence of the resulting list of MLModels. Valid Values: asc; dsc
+| sortOrder     | Select     | A two-value parameter that determines the sequence of the resulting list of MLModels. Valid Values: asc; dsc
 
 ## AmazonML.describeTags
 Describes one or more of the tags for your Amazon ML object.
@@ -260,7 +260,7 @@ Describes one or more of the tags for your Amazon ML object.
 | apiSecret   | credentials| API secret obtained from Amazon.
 | region      | String     | Region.
 | resourceId  | String     | The ID of the ML object. For example, exampleModelId.
-| resourceType| String     | The type of the ML object. Valid Values: BatchPrediction; DataSource; Evaluation; MLModel
+| resourceType| Select     | The type of the ML object. Valid Values: BatchPrediction; DataSource; Evaluation; MLModel
 
 ## AmazonML.getPrediction
 Returns a BatchPrediction that includes detailed metadata, status, and data file information for a Batch Prediction request.
@@ -281,7 +281,7 @@ Returns a DataSource that includes metadata and data file information, as well a
 | apiSecret   | credentials| API secret obtained from Amazon.
 | region      | String     | Region.
 | dataSourceId| String     | The ID assigned to the DataSource at creation.
-| verbose     | String     | Specifies whether the GetDataSource operation should return DataSourceSchema. True or false.
+| verbose     | Boolean    | Specifies whether the GetDataSource operation should return DataSourceSchema. True or false.
 
 ## AmazonML.getEvaluation
 Returns an Evaluation that includes metadata as well as the current status of the Evaluation.
@@ -302,7 +302,7 @@ Returns an MLModel that includes detailed metadata, data source information, and
 | apiSecret| credentials| API secret obtained from Amazon.
 | region   | String     | Region.
 | modelId  | String     | The ID assigned to the MLModel at creation.
-| verbose  | String     | Specifies whether the GetMLModel operation should return Recipe. True or false.
+| verbose  | Boolean     | Specifies whether the GetMLModel operation should return Recipe. True or false.
 
 ## AmazonML.predict
 Generates a prediction for the observation using the specified ML Model.
@@ -314,7 +314,7 @@ Generates a prediction for the observation using the specified ML Model.
 | region   | String     | Region.
 | modelId  | String     | The ID assigned to the MLModel at creation.
 | endpoint | String     | Endpoint for predict. Pattern: https://[a-zA-Z0-9-.]*\.amazon(aws)?\.com[/]?
-| record   | JSON       | A map of variable name-value pairs that represent an observation. See README for more details.
+| record   | Array      | A map of variable name-value pairs that represent an observation. See README for more details.
 
 #### record format
 ```json
@@ -376,8 +376,8 @@ Deletes the specified tags associated with an ML object. After this operation is
 | apiSecret   | credentials| API secret obtained from Amazon.
 | region      | String     | Region.
 | resourceId  | String     | The ID of the tagged ML object. For example, exampleModelId.
-| resourceType| String     | The type of the tagged ML object. Valid Values: BatchPrediction; DataSource; Evaluation; MLModel
-| tagKeys     | JSON       | Array of strings. One or more tags to delete. Example: ["tag1","tag2",...]
+| resourceType| Select     | The type of the tagged ML object. Valid Values: BatchPrediction; DataSource; Evaluation; MLModel
+| tagKeys     | List       | List of tags. One or more tags to delete. Example: ["tag1","tag2",...]
 
 #### tagKeys format
 ```json

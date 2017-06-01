@@ -19,8 +19,8 @@ $app->post('/api/AmazonML/getModel', function ($request, $response, $args) {
     ]);
     
     $body['MLModelId'] = $post_data['args']['modelId'];
-    if(!empty($post_data['args']['verbose'])) {
-        $body['Verbose'] = $post_data['args']['verbose'];
+    if(isset($post_data['args']['verbose'])) {
+        $body['Verbose'] = filter_var($post_data['args']['verbose'], FILTER_VALIDATE_BOOLEAN);
     }
     
     try {

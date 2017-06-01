@@ -20,7 +20,12 @@ $app->post('/api/AmazonML/addTags', function ($request, $response, $args) {
     
     $body['ResourceId'] = $post_data['args']['resourceId'];
     $body['ResourceType'] = $post_data['args']['resourceType'];
-    $body['Tags'] = $post_data['args']['tags'];
+    foreach ($post_data['args']['tags'] as $tag) {
+        $body['Tags'][] = [
+            "Key" => $tag['key'],
+            "Value" => $tag['value']
+        ];
+    }
     
     try {
         $res = $client->addTags($body)->toArray();
@@ -30,7 +35,7 @@ $app->post('/api/AmazonML/addTags', function ($request, $response, $args) {
         if(empty($result['contextWrites']['to'])) {
             $result['contextWrites']['to']['status_msg'] = "Api return no results";
         }
-    } catch (S3Exception $e) {
+    } catch (\Aws\S3\Exception\S3Exception $e) {
         // Catch an S3 specific exception.
         $result['callback'] = 'error';
         $result['contextWrites']['to']['status_code'] = 'API_ERROR';

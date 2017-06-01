@@ -52,15 +52,30 @@
         },
         {
           "name": "resourceType",
-          "type": "String",
+          "type": "Select",
+          "options": ["BatchPrediction", "DataSource", "Evaluation", "MLModel"],
           "info": "The type of the ML object to tag. Valid Values: BatchPrediction; DataSource; Evaluation; MLModel",
           "required": true
         },
         {
           "name": "tags",
-          "type": "JSON",
+          "type": "Array",
           "info": "Array of objects. The key-value pairs to use to create tags. If you specify a key without specifying a value, Amazon ML creates a tag with the specified key and a value of null. See README for more details.",
-          "required": true
+          "required": true,
+          "structure": [
+            {
+              "name": "key",
+              "type": "String",
+              "info": "Key",
+              "required": true
+            },
+            {
+              "name": "value",
+              "type": "String",
+              "info": "Value",
+              "required": false
+            }
+          ]
         }
       ],
       "callbacks": [
@@ -216,9 +231,15 @@
         },
         {
           "name": "securityGroupIds",
-          "type": "JSON",
+          "type": "List",
           "info": "Array of strings.  The security information to use to access an RDS DB instance. You need to set up appropriate ingress rules for the security entity IDs provided to allow access to the Amazon RDS instance.",
-          "required": true
+          "required": true,
+          "structure": {
+            "name": "id",
+            "type": "String",
+            "info": "The security group IDs to be used to access a VPC-based RDS DB instance.",
+            "required": true
+          }
         },
         {
           "name": "sqlQuery",
@@ -246,13 +267,13 @@
         },
         {
           "name": "dataRearrangement",
-          "type": "String",
+          "type": "JSON",
           "info": "A JSON string that represents the splitting and rearrangement requirements for the Datasource. Sample - \"{\"splitting\":{\"percentBegin\":10,\"percentEnd\":60}}\"",
           "required": false
         },
         {
           "name": "dataSchema",
-          "type": "String",
+          "type": "JSON",
           "info": "A JSON string representing the schema. This is not required if DataSchemaUri is specified.",
           "required": false
         },
@@ -358,13 +379,13 @@
         },
         {
           "name": "dataRearrangement",
-          "type": "String",
+          "type": "JSON",
           "info": "A JSON string that represents the splitting and rearrangement requirements for the Datasource. Sample - \"{\"splitting\":{\"percentBegin\":10,\"percentEnd\":60}}\"",
           "required": false
         },
         {
           "name": "dataSchema",
-          "type": "String",
+          "type": "JSON",
           "info": "A JSON string representing the schema. This is not required if DataSchemaUri is specified.",
           "required": false
         },
@@ -434,13 +455,13 @@
         },
         {
           "name": "dataRearrangement",
-          "type": "String",
+          "type": "JSON",
           "info": "A JSON string that represents the splitting and rearrangement requirements for the Datasource. Sample - \"{\"splitting\":{\"percentBegin\":10,\"percentEnd\":60}}\"",
           "required": false
         },
         {
           "name": "dataSchema",
-          "type": "String",
+          "type": "JSON",
           "info": "A JSON string representing the schema. This is not required if DataSchemaUri is specified.",
           "required": false
         },
@@ -550,7 +571,8 @@
         },
         {
           "name": "modelType",
-          "type": "String",
+          "type": "Select",
+          "options": ["REGRESSION", "BINARY", "MULTICLASS"],
           "info": "The category of supervised learning that this MLModel will address. Choose from the following types: Choose REGRESSION if the MLModel will be used to predict a numeric value. Choose BINARY if the MLModel result has two possible values. Choose MULTICLASS if the MLModel result has a limited number of values.",
           "required": true
         },
@@ -720,7 +742,8 @@
         },
         {
           "name": "sortOrder",
-          "type": "String",
+          "type": "Select",
+          "options": ["asc", "desc"],
           "info": "A two-value parameter that determines the sequence of the resulting list of MLModels. Valid Values: asc; dsc",
           "required": false
         }
@@ -820,7 +843,8 @@
         },
         {
           "name": "sortOrder",
-          "type": "String",
+          "type": "Select",
+          "options": ["asc", "desc"],
           "info": "A two-value parameter that determines the sequence of the resulting list of MLModels. Valid Values: asc; dsc",
           "required": false
         }
@@ -920,7 +944,8 @@
         },
         {
           "name": "sortOrder",
-          "type": "String",
+          "type": "Select",
+          "options": ["asc", "desc"],
           "info": "A two-value parameter that determines the sequence of the resulting list of MLModels. Valid Values: asc; dsc",
           "required": false
         }
@@ -1020,7 +1045,8 @@
         },
         {
           "name": "sortOrder",
-          "type": "String",
+          "type": "Select",
+          "options": ["asc", "desc"],
           "info": "A two-value parameter that determines the sequence of the resulting list of MLModels. Valid Values: asc; dsc",
           "required": false
         }
@@ -1066,7 +1092,8 @@
         },
         {
           "name": "resourceType",
-          "type": "String",
+          "type": "Select",
+          "options": ["BatchPrediction", "DataSource", "Evaluation", "MLModel"],
           "info": "The type of the ML object. Valid Values: BatchPrediction; DataSource; Evaluation; MLModel",
           "required": true
         }
@@ -1152,7 +1179,7 @@
         },
         {
           "name": "verbose",
-          "type": "String",
+          "type": "Boolean",
           "info": "Specifies whether the GetDataSource operation should return DataSourceSchema. True or false.",
           "required": false
         }
@@ -1238,7 +1265,7 @@
         },
         {
           "name": "verbose",
-          "type": "String",
+          "type": "Boolean",
           "info": "Specifies whether the GetMLModel operation should return Recipe. True or false.",
           "required": false
         }
@@ -1290,9 +1317,23 @@
         },
         {
           "name": "record",
-          "type": "JSON",
+          "type": "Array",
           "info": "A map of variable name-value pairs that represent an observation. See README for more details.",
-          "required": true
+          "required": true,
+          "structure": [
+            {
+              "name": "key",
+              "type": "String",
+              "info": "Key",
+              "required": true
+            },
+            {
+              "name": "value",
+              "type": "String",
+              "info": "Value",
+              "required": true
+            }
+          ]
         }
       ],
       "callbacks": [
@@ -1526,15 +1567,22 @@
         },
         {
           "name": "resourceType",
-          "type": "String",
+          "type": "Select",
+          "options": ["BatchPrediction", "DataSource", "Evaluation", "MLModel"],
           "info": "The type of the tagged ML object. Valid Values: BatchPrediction; DataSource; Evaluation; MLModel",
           "required": true
         },
         {
           "name": "tagKeys",
-          "type": "JSON",
+          "type": "List",
           "info": "Array of strings. One or more tags to delete. Example: [\"tag1\",\"tag2\",...]",
-          "required": true
+          "required": true,
+          "structure": {
+            "name": "tag",
+            "type": "String",
+            "info": "Tag",
+            "required": true
+          }
         }
       ],
       "callbacks": [
