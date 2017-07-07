@@ -22,8 +22,8 @@ $app->post('/api/AmazonML/addTags', function ($request, $response, $args) {
     $body['ResourceType'] = $post_data['args']['resourceType'];
     foreach ($post_data['args']['tags'] as $tag) {
         $body['Tags'][] = [
-            "Key" => $tag['key'],
-            "Value" => $tag['value']
+            "Key" => $tag['Key'],
+            "Value" => $tag['Value']
         ];
     }
     
